@@ -1,7 +1,7 @@
 ## psa-reports-downloader
 If you work closely with Philippine data, you probably know that the Philippine Statistics Authority (PSA) provides highlights/key points on periodic statistical releases (such as monthly inflation, trade performance, etc) on its website at http://psa.gov.ph/. These summaries are usually accompanied by downloadable attachments (such as PDF or Excel files) containing the data used to generate the report. Sometimes, accessing and downloading these attachments can become excruciatingly tedious, especially if you're trying to gather data for longer time horizons and you need files from dozens or even hundreds of summary reports.
 
-To make your life a bit easier, you can use this  Python script to download all attachments associated with a given report simply by providing the link to the report's page. Plus, this script allows you to specify multiple reports, so that you can download everything you need in one sitting.
+You can use this  Python script to quickly and conveniently download all attachments associated with a given report simply by providing the link to the report's page. Plus, this script allows you to specify multiple reports, so that you can download everything you need in one sitting.
 
 ## Requirements
 This script runs on Python 2.7 and uses the following packages:
