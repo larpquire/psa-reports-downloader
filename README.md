@@ -5,11 +5,13 @@ To make your life a bit easier, you can use this  Python script to download all 
 
 ## Requirements
 This script runs on Python 2.7 and uses the following packages:
+
 1. `requests` (`pip install requests`)
 2. `lxml` (`pip install lxml`)
 
 ## Usage Instructions
 To start downloading the data files, please install the above requirements and then go through the following steps:
+
 1. Open the file `links.txt` in this project's root directory and make sure that the file is empty.
 2. Paste the PSA report's link on a blank line. If you're going to download attachments from more than one report, paste each link on a separate line. For example, let's say you want  to download the attachments for two PSA summary reports: "Highlights of the Philippine Population 2015 Census of Population" and the "Monthly Integrated Survey of Selected Industries : May 2016". Then the contents of the `links.txt` file should look something like this:
     ```
