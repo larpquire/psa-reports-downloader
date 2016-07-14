@@ -5,11 +5,13 @@ You can use this  Python script to download all attachments associated with a gi
 
 ## Requirements
 This script runs on Python 2.7 and uses the following packages:
+
 1. `requests` (`pip install requests`)
 2. `lxml` (`pip install lxml`)
 
 ## Usage Instructions
 To start downloading the data files, please install the above requirements and then go through the following steps:
+
 1. Open the file `links.txt` in this project's root directory and make sure that the file is empty.
 2. Paste the PSA report's link on a blank line. If you're going to download attachments from more than one report, paste each link on a separate line. For example, let's say you want  to download the attachments for two PSA summary reports: "Highlights of the Philippine Population 2015 Census of Population" and the "Monthly Integrated Survey of Selected Industries : May 2016". Then the contents of the `links.txt` file should look something like this:
 ```
@@ -25,7 +27,7 @@ $ python downloader.py
 
 ## Output/Downloaded Files
 Each PSA report you specified in the `links.txt` file will have its own directory where its attachments will be saved. To illustrate, the example used in the Usage Instructions above produces the following directory structure:
-
+```
 psa-reports-downloader
 ¦   .gitignore
 ¦   downloader.py
@@ -67,7 +69,7 @@ psa-reports-downloader
                     sk160506.pdf
                     sk160507.pdf
                     sk160508.pdf
-                    
+```
 The above directory tree shows that downloads are organized according to the date of download, then by the time of download, and then by the associated summary report. Here, the folder `001` contains downloaded attachments of the "Highlights of the Philippine Population 2015 Census of Population" while the folder `002` contains the downloaded attachments of the "Monthly Integrated Survey of Selected Industries : May 2016" report. The numberings of the reports folder are based on the `links.txt` file. The filenames of the attachments are kept as they appear on the PSA's servers.
                     
 ## Contributing
