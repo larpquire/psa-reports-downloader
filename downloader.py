@@ -27,16 +27,30 @@ class PSADownloader(object):
             self.counts['reports'] = len(self.page_links)
 
     def _make_dirs(self):
-        root_dl_dir = os.path.join(os.getcwd(), 'Downloads')
-        main_dl_dir = os.path.join(
-            root_dl_dir,
+        self.root_dl_dir = os.path.join(os.getcwd(), 'Downloads')
+        self.main_dl_dir = os.path.join(
+            self.root_dl_dir,
             datetime.now().strftime('%Y-%m-%d\\%H.%M.%S')
         )
 
         for i in range(self.counts['reports']):
-            path = os.path.join(main_dl_dir, '%03d' % (i + 1))
+            path = os.path.join(self.main_dl_dir, '%03d' % (i + 1))
             os.makedirs(path)
             self.paths.append(path)
+    
+    def _cleanup(self):
+        empty_dirs = 0
+        
+        for dirpath, dirnames, _ in os.walk(self.root_dl_dir):
+            for dir in dirnames:
+                path = os.path.join(dirpath, dir)
+                
+                if not os.listdir(path):
+                    os.rmdir(path)
+                    empty_dirs += 1
+        
+        if empty_dirs > 0:
+            self._cleanup()
 
     def run(self):
         self.counts['total files found'] = 0
@@ -52,12 +66,18 @@ class PSADownloader(object):
                 self._print('Now processing %s' % url)
                 self.parse_page(url)
             except Exception as e:
-                self._print('- %s' % e, level=1)
+                self._print('- ERROR: %s' % e, level=1)
                 continue
 
         self.totaltime = time() - t_start
-        self._print('Finished.')
-        self._show_summary()
+        
+        if self.counts['total files saved'] > 0:
+            self._print('Finished.')
+            self._show_summary()
+        else:
+            self._print('Aborted.')
+        
+        self._cleanup()
 
     def parse_page(self, url):
         self.counts['files found'] = 0
@@ -126,7 +146,7 @@ class PSADownloader(object):
                 else:
                     raise ValueError('Unable to download %s' % name)
             except Exception as e:
-                self._print('- %s' % e, level=2, newline=False)
+                self._print('- ERROR: %s' % e, level=2, newline=False)
                 self.counts['files skipped'] += 1
             finally:
                 self._print()
